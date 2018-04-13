@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom</title>
+</head>
+<body>
+<table border="1">
+    <thead>
+    <tr>
+        <td>用户名</td>
+        <td>账号</td>
+        <td>初始入金</td>
+        <td>开户时间</td>
+        <td>级别</td>
+        <td>手数</td>
+        <td>上级</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in contacts %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.account }}</td>
+            <td>{{ item.init_money }}</td>
+            <td>{{ item.create_time }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.lot}}</td>
+            <td>{{ item.upper }}</td>
+
+        </tr>
+    {% endfor %}
+    </tbody>
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ contacts.number }} of {{ contacts.paginator.num_pages }}.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">next</a>
+        {% endif %}
+    </span>
+</div>
+<div>
+    <button onclick="window.location.href='/custom/update'">更新层级关系</button>
+    <button onclick="window.location.href='/commission'">佣金计算</button>
+</div>
+</body>
+</html>
